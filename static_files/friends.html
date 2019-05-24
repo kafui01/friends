@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>-->
+  <script src="./jquery-3.4.1.js"></script>
+  <title>Document</title>
+  <script type="text/javascript">
+  $(document).ready(() => {
+    $('#allUsersButton').click(() => {
+     $.ajax({
+       url:'/users',
+       type:'GET',
+       dataType:'json',
+       success:(data) => {
+         console.log('ajax success', data);
+         $('#status').html('All users: '+ data);
+       }
+     });
+    })
+  });
+  </script>
+</head>
+<body>
+  <h1>WELCOME TO MY APP</h1>
+  NAME: <input id="nameBox" type="text" size="20"/>
+  <button id="readButton">get profile</button>
+  <button id="allUsersButton">get all usernames</button>
+
+  <div id="jobDiv"></div>
+  <div id="petImage"></div>
+
+  <hr/>
+  <div id="status"></div>
+</body>
+</html>
