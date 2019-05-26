@@ -10,6 +10,31 @@
   <title>Document</title>
   <script type="text/javascript">
   $(document).ready(() => {
+    $('#readButton').click(() => {
+      const requestURL = 'users/' + $('#nameBox').val();
+      console.log('making request to:', requestURL);
+      
+      $.ajax({
+        url: requestURL,
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          if(data.job && data.pet) {
+            $('#status').html('fetched data at ' + requestURL);
+            $('#jobDiv').html('my job is ' + data.job);
+            $('#petImage').attr('src', data.pet).attr('width', '300px');
+          } else {
+            $('#status').html('ERROR: name not in database');
+             $('#jobDiv').html('');
+            $('#petImage').attr('src', data.pet).attr('width','0px');
+          }
+           let mydata = JSON.stringify(data);
+          console.log('got data ' + mydata);
+        }
+      })
+    });
+
+
     $('#allUsersButton').click(() => {
      $.ajax({
        url:'/users',
@@ -32,8 +57,6 @@
 
   <div id="jobDiv"></div>
   <div id="petImage"></div>
-
-  <hr/>
   <div id="status"></div>
 </body>
 </html>
